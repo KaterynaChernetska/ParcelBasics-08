@@ -8,6 +8,7 @@ const formData = {};
 
 function getValue() {
   const savedValues = localStorage.load(VALUES_KEY);
+  console.log(savedValues);
 
   if (savedValues === undefined) {
     return;
@@ -20,13 +21,15 @@ function getValue() {
 getValue();
 
 function onFormInput(event) {
-  const { target } = event;
 
-  const fieldValue = target.value;
-  const fieldName = target.name;
+  const email = form.elements.email.value;
+  const message = form.elements.message.value;
 
-  formData[fieldName] = fieldValue;
-
+const formData = {
+    email,
+    message,
+  }
+  console.log(formData);
   localStorage.save(VALUES_KEY, formData);
 }
 
@@ -34,12 +37,13 @@ function onFormInput(event) {
 function onFormSubmit(event) {
   event.preventDefault();
 
-  console.log(formData);
+  const savedValues = localStorage.load(VALUES_KEY);
+  console.log(savedValues);
 
   localStorage.remove(VALUES_KEY);
   form.reset(); 
-
 }
 
-form.addEventListener('input', throttle(onFormInput, 500));
 form.addEventListener('submit', onFormSubmit);
+
+form.addEventListener('input', throttle(onFormInput, 500));

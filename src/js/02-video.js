@@ -8,23 +8,17 @@ const CURRENT_TIME_KEY = 'videoplayer-current-time';
 
 const onPlay = function (data) {
 
-    localStorage.save(CURRENT_TIME_KEY, data);  
+    localStorage.save(CURRENT_TIME_KEY, data.seconds);  
+
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
-
-player
-  .setCurrentTime(59.112)
-  .then(function (seconds) {
-  })
-  .catch(function (error) {
-    switch (error.name) {
-      case 'RangeError':
-        console.log('The time was less than 0 or greater than the video’s duration');
-        break;
-
-      default:
-
-        break;
-    }
-  });
+function getValue () {
+    const savedValue = localStorage.load(CURRENT_TIME_KEY);
+    if (savedValue === undefined)
+    return; 
+    else {
+        player.setCurrentTime(savedValue)
+   }    
+}
+getValue ();
