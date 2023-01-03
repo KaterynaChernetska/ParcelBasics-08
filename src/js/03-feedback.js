@@ -4,11 +4,11 @@ import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.feedback-form');
 const VALUES_KEY = 'feedback-form-state';
-const formData = {};
+// const formData = {};
 
 function getValue() {
   const savedValues = localStorage.load(VALUES_KEY);
-  console.log(savedValues);
+//   console.log(savedValues);
 
   if (savedValues === undefined) {
     return;
@@ -16,7 +16,9 @@ function getValue() {
 
   for (const elem in savedValues) {
     form.elements[elem].value = savedValues[elem];
+    console.log(savedValues[elem]);
   }
+
 }
 getValue();
 
@@ -29,7 +31,7 @@ const formData = {
     email,
     message,
   }
-  console.log(formData);
+//   console.log(formData);
   localStorage.save(VALUES_KEY, formData);
 }
 

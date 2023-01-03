@@ -13,6 +13,7 @@ const onPlay = function (data) {
 };
 
 player.on('timeupdate', throttle(onPlay, 1000));
+
 function getValue () {
     const savedValue = localStorage.load(CURRENT_TIME_KEY);
     if (savedValue === undefined)
